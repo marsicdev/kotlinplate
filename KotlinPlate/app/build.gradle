@@ -1,0 +1,189 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def BOOLEAN = "boolean"
+def STRING = "String"
+def TRUE = "true"
+def FALSE = "false"
+def LOG_HTTP_REQUESTS = "LOG_HTTP_REQUESTS"
+def REPORT_CRASHES = "REPORT_CRASHES"
+def API_URL = "API_URL"
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 1
+
+android {
+
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+
+        applicationId "info.marsic.ktboilerplate"
+
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch * 10 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+
+        proguardFile getDefaultProguardFile('proguard-android.txt')
+        proguardFiles fileTree(include: ['*.pro'], dir: 'proguard').asList().toArray()
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+
+        buildConfigField STRING, API_URL, '"http://API_URL/"'
+        buildConfigField BOOLEAN, LOG_HTTP_REQUESTS, TRUE
+        buildConfigField BOOLEAN, REPORT_CRASHES, FALSE
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file(DEBUG_KEYSTORE_PATH)
+            storePassword DEBUG_KEYSTORE_PASS
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASS
+        }
+
+        release {
+            storeFile file(RELEASE_KEYSTORE_PATH)
+            storePassword RELEASE_KEYSTORE_PASS
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASS
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+
+            testCoverageEnabled = TRUE
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        debug.java.srcDirs += 'src/debug/kotlin'
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            outputs.upToDateWhen { false }
+            showStandardStreams = true
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError true
+        disable 'InvalidPackage'
+    }
+
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == "lint") {
+        task.enabled = false
+    }
+}
+
+dependencies {
+
+    compile(
+            fileTree(include: ['*.jar'], dir: 'libs'),
+            "com.android.support:support-v4:${supportLibVersion}",
+            "com.android.support:appcompat-v7:${supportLibVersion}",
+            "com.android.support:recyclerview-v7:${supportLibVersion}",
+            "com.android.support:cardview-v7:${supportLibVersion}",
+            "com.android.support:design:${supportLibVersion}",
+
+            "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+
+            // Kotlin
+            "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+
+            // RxJava
+            "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+
+            // Dagger
+            "com.google.dagger:dagger:${daggerVersion}",
+
+            // rest client for http interaction and dependencies
+            "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+
+            "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+            "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+    )
+
+    kapt(
+            "com.google.dagger:dagger-compiler:${daggerVersion}"
+    )
+
+    testCompile(
+            "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+
+            // Unit testing dependencies
+            "junit:junit:${junitVersion}",
+            "org.mockito:mockito-core:${mockitoVersion}",
+            "org.hamcrest:hamcrest-library:${hamcrestVersion}"
+    )
+
+    testCompile("com.squareup.assertj:assertj-android:${assertjVersion}") {
+        exclude module: "support-annotations"
+    }
+
+    kaptAndroidTest "com.google.dagger:dagger-compiler:${daggerVersion}"
+
+    androidTestCompile(
+            "com.android.support:support-annotations:${supportLibVersion}",
+            "com.android.support.test:runner:${runnerVersion}",
+            // Set this dependency to use JUnit 4 rules
+            "com.android.support.test:rules:${rulesVersion}",
+            // Set this dependency to build and run UI Automator tests
+            "org.mockito:mockito-core:${mockitoVersion}",
+            // Set this dependency to build and run Espresso tests
+            "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+
+            "com.crittercism.dexmaker:dexmaker:${dexMakerVersion}",
+            "com.crittercism.dexmaker:dexmaker-mockito:${dexMakerVersion}",
+            "com.crittercism.dexmaker:dexmaker-dx:${dexMakerVersion}"
+    )
+
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") {
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+    }
+}

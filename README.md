@@ -6,7 +6,7 @@ Project contains a detailed sample app that implements MVP architecture using Ko
 For `code` check [develop branch](https://github.com/marsicdev/kotlinplate/tree/develop).
 
 **Notice:**
-Created for personal use and still work in progress
+This project is created for personal use and it is constant work in progress
 
 ## Project
 
@@ -18,23 +18,18 @@ Created for personal use and still work in progress
 3. **ui**: View classes along with their corresponding Presenters and Contracts
 4. **utils**: Extension functions
 
-#### Build flavors
-
-* **debug**
-* **release** 
-
 ## Resources
 
-### Libraries
+### Libraries used
 
-1. [Kotlin - Statically typed programming language for the JVM, Android and the browser](https://kotlinlang.org)
-1. [Dagger2 - A fast dependency injector for Android and Java](https://github.com/googlesamples/android-architecture)
-2. [RxJava2 - Reactive Extensions for the JVM](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples)
-3. [RxAndroid - Reactive Extensions for Android](https://github.com/ReactiveX/RxAndroid)
-4. [Retrofit - Type-safe HTTP client for Android and Java](https://github.com/amitshekhariitbhu/Fast-Android-Networking)
-4. [OkHttp - An HTTP+HTTP/2 client for Android and Java](https://github.com/janishar/PlaceHolderView)
+1. [Kotlin](https://kotlinlang.org) - Statically typed programming language for the JVM, Android and the browser
+1. [Dagger2](https://github.com/googlesamples/android-architecture) - A fast dependency injector for Android and Java
+2. [RxJava2](https://github.com/amitshekhariitbhu/RxJava2-Android-Samples) - Reactive Extensions for the JVM
+3. [RxAndroid](https://github.com/ReactiveX/RxAndroid) - Reactive Extensions for Android
+4. [Retrofit](https://github.com/amitshekhariitbhu/Fast-Android-Networking) - Type-safe HTTP client for Android and Java
+4. [OkHttp](https://github.com/janishar/PlaceHolderView) - An HTTP+HTTP/2 client for Android and Java 
 
-### References 
+### Code references 
 
 1. [Google - Android Architecture Blueprints](https://github.com/googlesamples/android-architecture)
 2. [MindorksOpenSource - Android MVP Architecture](https://github.com/MindorksOpenSource/android-mvp-architecture)

@@ -6,18 +6,15 @@ import io.reactivex.disposables.CompositeDisposable
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito.*
-import org.mockito.runners.MockitoJUnitRunner
 import org.mockito.Mockito.`when` as whenMock
 
-@RunWith(MockitoJUnitRunner::class)
 class AboutPresenterTest {
 
-    internal val dataManager: DataManager = mock(DataManager::class.java)
-    internal val aboutView: AboutContract.View = mock(AboutContract.View::class.java)
+    private val dataManager: DataManager = mock(DataManager::class.java)
+    private val aboutView: AboutContract.View = mock(AboutContract.View::class.java)
 
-    internal val aboutPresenter: AboutPresenter<AboutContract.View> = AboutPresenter(dataManager, CompositeDisposable())
+    private val aboutPresenter: AboutPresenter<AboutContract.View> = AboutPresenter(dataManager, CompositeDisposable())
 
     @Before
     @Throws(Exception::class)

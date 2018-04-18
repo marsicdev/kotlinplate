@@ -29,7 +29,7 @@ class AboutActivity : BaseActivity() {
         aboutTabLayout?.setupWithViewPager(aboutViewPager)
     }
 
-    fun initToolbar() {
+    private fun initToolbar() {
         toolbar.title = getString(R.string.nav_about)
         toolbar.subtitle = getString(R.string.app_name)
 
@@ -46,12 +46,12 @@ class AboutActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val itemId = item.itemId
-        when (itemId) {
+        return when (itemId) {
             android.R.id.home -> {
                 NavUtils.navigateUpFromSameTask(this)
-                return true
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

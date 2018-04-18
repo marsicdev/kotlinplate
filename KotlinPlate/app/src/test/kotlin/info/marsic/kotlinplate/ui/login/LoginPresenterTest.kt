@@ -9,13 +9,12 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.*
 import org.mockito.runners.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class LoginPresenterTest {
 
-    internal val dataManager: DataManager = mock(DataManager::class.java)
-    internal val loginView: LoginContract.View = mock(LoginContract.View::class.java)
+    private val dataManager: DataManager = mock(DataManager::class.java)
+    private val loginView: LoginContract.View = mock(LoginContract.View::class.java)
 
-    internal val loginPresenter: LoginPresenter<LoginContract.View> = LoginPresenter(dataManager, CompositeDisposable())
+    private val loginPresenter: LoginPresenter<LoginContract.View> = LoginPresenter(dataManager, CompositeDisposable())
 
     @Before
     fun setUp() {

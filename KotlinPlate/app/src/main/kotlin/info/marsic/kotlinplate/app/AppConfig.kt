@@ -2,8 +2,8 @@ package info.marsic.kotlinplate.app
 
 object AppConfig {
 
-    val PREF_NAME_KEY = "info.marsic.ktboilerplate.PREFERENCES"
+    const val PREF_NAME_KEY = "info.marsic.ktboilerplate.PREFERENCES"
 
-    val NULL_INDEX = -1L
-    val TIMESTAMP_FORMAT: String = "yyyyMMdd_HHmmss"
+    const val NULL_INDEX = -1L
+    const val TIMESTAMP_FORMAT: String = "yyyyMMdd_HHmmss"
 }

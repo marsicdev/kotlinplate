@@ -1,6 +1,5 @@
 package info.marsic.kotlinplate.utils
 
-//import info.marsic.ktboilerplate.app.AppConfig
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog

@@ -10,13 +10,12 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.*
 import org.mockito.runners.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class HomePresenterTest {
 
-    internal val dataManager: DataManager = mock(DataManager::class.java)
-    internal val homeView: HomeContract.View = mock(HomeContract.View::class.java)
+    private val dataManager: DataManager = mock(DataManager::class.java)
+    private val homeView: HomeContract.View = mock(HomeContract.View::class.java)
 
-    internal val homePresenter: HomePresenter<HomeContract.View> = HomePresenter(dataManager, CompositeDisposable())
+    private val homePresenter: HomePresenter<HomeContract.View> = HomePresenter(dataManager, CompositeDisposable())
 
     @Before
     fun setUp() {

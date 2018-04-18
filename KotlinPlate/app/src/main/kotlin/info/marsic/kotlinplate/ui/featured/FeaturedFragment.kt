@@ -14,8 +14,8 @@ class FeaturedFragment : BaseFragment(), FeaturedContract.View {
 
     //region Lifecycle
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater?.inflate(R.layout.featured_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.featured_fragment, container, false)
 
         activityComponent.inject(this)
         presenter.onAttach(this)
@@ -23,10 +23,6 @@ class FeaturedFragment : BaseFragment(), FeaturedContract.View {
         setHasOptionsMenu(true)
 
         return view
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     //endregion

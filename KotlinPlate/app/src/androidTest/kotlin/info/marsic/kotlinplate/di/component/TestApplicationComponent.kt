@@ -6,5 +6,5 @@ import info.marsic.kotlinplate.di.module.TestApplicationModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(TestApplicationModule::class, TestApiServiceModule::class))
+@Component(modules = [(TestApplicationModule::class), (TestApiServiceModule::class)])
 interface TestApplicationComponent : ApplicationComponent

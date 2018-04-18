@@ -11,7 +11,6 @@ import org.mockito.Mockito.*
 import org.mockito.runners.MockitoJUnitRunner
 import org.mockito.Mockito.`when` as whenMock
 
-@RunWith(MockitoJUnitRunner::class)
 class FeaturedPresenterTest {
 
     private val dataManager: DataManager = mock(DataManager::class.java)

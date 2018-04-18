@@ -116,71 +116,67 @@ tasks.whenTaskAdded { task ->
 
 dependencies {
 
-    compile(
-            fileTree(include: ['*.jar'], dir: 'libs'),
-            "com.android.support:support-v4:${supportLibVersion}",
-            "com.android.support:appcompat-v7:${supportLibVersion}",
-            "com.android.support:recyclerview-v7:${supportLibVersion}",
-            "com.android.support:cardview-v7:${supportLibVersion}",
-            "com.android.support:design:${supportLibVersion}",
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
 
-            "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+    implementation "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}"
 
-            // Kotlin
-            "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-            // RxJava
-            "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
 
-            // Dagger
-            "com.google.dagger:dagger:${daggerVersion}",
+    // Dagger - dependency injection
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
 
-            // rest client for http interaction and dependencies
-            "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+    // rest client for http interaction and dependencies
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
 
-            "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-            "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
-    )
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
 
-    kapt(
-            "com.google.dagger:dagger-compiler:${daggerVersion}"
-    )
+    // Kotlin
+    testImplementation "org.jetbrains.kotlin:kotlin-test:${kotlinVersion}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}"
 
-    testCompile(
-            "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
-            "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+    // Unit testing dependencies
+    testImplementation "junit:junit:${junitVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.hamcrest:hamcrest-library:${hamcrestVersion}"
 
-            // Unit testing dependencies
-            "junit:junit:${junitVersion}",
-            "org.mockito:mockito-core:${mockitoVersion}",
-            "org.hamcrest:hamcrest-library:${hamcrestVersion}"
-    )
-
-    testCompile("com.squareup.assertj:assertj-android:${assertjVersion}") {
+    testImplementation("com.squareup.assertj:assertj-android:${assertjVersion}") {
         exclude module: "support-annotations"
     }
 
     kaptAndroidTest "com.google.dagger:dagger-compiler:${daggerVersion}"
 
-    androidTestCompile(
-            "com.android.support:support-annotations:${supportLibVersion}",
-            "com.android.support.test:runner:${runnerVersion}",
-            // Set this dependency to use JUnit 4 rules
-            "com.android.support.test:rules:${rulesVersion}",
-            // Set this dependency to build and run UI Automator tests
-            "org.mockito:mockito-core:${mockitoVersion}",
-            // Set this dependency to build and run Espresso tests
-            "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+    androidTestImplementation "com.android.support:support-annotations:${supportLibVersion}"
+    androidTestImplementation "com.android.support.test:runner:${runnerVersion}"
 
-            "com.crittercism.dexmaker:dexmaker:${dexMakerVersion}",
-            "com.crittercism.dexmaker:dexmaker-mockito:${dexMakerVersion}",
-            "com.crittercism.dexmaker:dexmaker-dx:${dexMakerVersion}"
-    )
+    // Set this dependency to use JUnit 4 rules
+    androidTestImplementation "com.android.support.test:rules:${rulesVersion}"
 
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") {
+    // Set this dependency to build and run UI Automator tests
+    androidTestImplementation "org.mockito:mockito-core:${mockitoVersion}"
+
+    // Set this dependency to build and run Espresso tests
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker:${dexMakerVersion}"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker-mockito:${dexMakerVersion}"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker-dx:${dexMakerVersion}"
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") {
         exclude module: 'support-annotations'
         exclude module: 'support-v4'
         exclude module: 'support-v13'
